@@ -132,6 +132,8 @@ client.on("message", function (message) {
         let author = message.guild.member(message.author);
         let nickname = author ? author.displayName : null; /////////author nickname
         let guildname = message.guild.name;
+        if (rolemap === undefined) { message.reply("Something went wrong, please try again"); return; }
+        
         const embed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle(`${guildname} Teams`)
@@ -139,7 +141,7 @@ client.on("message", function (message) {
             .setThumbnail(message.guild.iconURL())
             .addField('Role List', rolemap)
             .setTimestamp()
-            .setFooter('Created by Roster Bot', 'https://i.imgur.com/wSTFkRM.png'); /////change to rosterbot image when I have it
+            .setFooter('Created by Roster Bot', 'https://imgur.com/TKZLq41'); /////change to rosterbot image when I have it
         message.channel.send(embed);
         //const embed = new Discord.MessageEmbed() /////puts the results into a sunk message
         //    .addField("Role List", rolemap)
@@ -162,13 +164,17 @@ client.on("message", function (message) {
             let author = message.guild.member(message.author);
             let nickname = author ? author.displayName : null; /////////author nickname
             let guildname = message.guild.name;
+            if (members === undefined) { message.reply("Something went wrong, please try again"); return; }
+            if (membersize === undefined) { message.reply("Something went wrong, please try again"); return; }
+            if (guildname === undefined) { message.reply("Something went wrong, please try again"); return; }
+
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(nickname, message.author.displayAvatarURL())
                 .setThumbnail(message.guild.iconURL())
                 .addField(`${guildname} Roster (${membersize} members)`, members)
                 .setTimestamp()
-                .setFooter('Created by Roster Bot', 'https://i.imgur.com/wSTFkRM.png'); /////change to rosterbot image when I have it
+                .setFooter('Created by Roster Bot', 'https://imgur.com/TKZLq41'); /////change to rosterbot image when I have it
             message.channel.send(embed);
             //const embed = new Discord.MessageEmbed() /////puts the results into a sunk message
             //    .addField(`Server Roster (${membersize} members)`, members)
@@ -191,13 +197,17 @@ client.on("message", function (message) {
             var emoji = message.guild.emojis.cache.find(emoji => emoji.name === messarg.replace(' ', ''));
             let emojiurl = null;
             if (emoji) { emojiurl = emoji.url; } /////////////team emoji??? 
+            if (membersWithRole === undefined) { message.reply("Something went wrong, please try again"); return; }
+            if (memberswithsize === undefined) { message.reply("Something went wrong, please try again"); return; }
+            if (messarg === undefined) { message.reply("Something went wrong, please try again"); return; }
+
             const embed = new Discord.MessageEmbed()
                 .setColor('#0099ff')
                 .setAuthor(nickname, message.author.displayAvatarURL())
                 .setThumbnail(emojiurl)
                 .addField(`${messarg} Roster (${memberswithsize} members)`, membersWithRole)
                 .setTimestamp()
-                .setFooter('Created by Roster Bot', 'https://i.imgur.com/wSTFkRM.png'); /////change to rosterbot image when I have it
+                .setFooter('Created by Roster Bot', 'https://imgur.com/TKZLq41'); /////change to rosterbot image when I have it
             message.channel.send(embed);
         }
 
@@ -311,6 +321,11 @@ client.on("message", function (message) {
         let emojiurl = null;
         if (emoji) { emojiurl = emoji.url; } /////////////team emoji??? 
         var d = new Date();
+        if (givearg[1] === undefined) { message.reply("Something went wrong, please try again"); return; }
+        if (presentnames === undefined) { message.reply("Something went wrong, please try again"); return; }
+        if (absentnames === undefined) { message.reply("Something went wrong, please try again"); return; }
+        if (presentsize === undefined) { message.reply("Something went wrong, please try again"); return; }
+        if (absentsize === undefined) { message.reply("Something went wrong, please try again"); return; }
         const embed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle(`${givearg[0]} Attendance`)
@@ -321,7 +336,7 @@ client.on("message", function (message) {
             .addField(`${presentsize} attending`, presentnames)
             .addField(`${absentsize} missing`, absentnames)
             .setTimestamp()
-            .setFooter('Created by Roster Bot', 'https://i.imgur.com/wSTFkRM.png'); /////change to rosterbot image when I have it
+            .setFooter('Created by Roster Bot', 'https://imgur.com/TKZLq41'); /////change to rosterbot image when I have it
         message.channel.send(embed);
         //const embed = new Discord.MessageEmbed()
         //    .addField(`${presentsize} attending`, presentnames)
@@ -360,6 +375,7 @@ client.on("message", function (message) {
 
         if (absent.length === 0 | absent === undefined) { message.reply('No team members absent'); return; }
         var absentnames = message.guild.members.cache.filter(members => absent.indexOf(members.id) > -1).map(member => member.displayName).join("\n");
+        if (absentnames === undefined) { message.reply("Something went wrong, please try again"); return; }
         const absentembed = new Discord.MessageEmbed()
             .addField(`The following team members are absent`, absentnames)
             .addField('Send Warning?', 'Type in the name of the event they are absent for')
@@ -569,6 +585,7 @@ client.on("message", function (message) {
         let author = message.guild.member(message.author);
         let nickname = author ? author.displayName : null; /////////author nickname
         let guildname = message.guild.name;
+        if (teamstrings === undefined) { message.reply("Something went wrong, please try again"); return; }
         const embed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle(`Team list for ${guildname}`)
@@ -576,7 +593,7 @@ client.on("message", function (message) {
             .setThumbnail(message.guild.iconURL())
             .addField('Teams', teamstrings.join('\n'))
             .setTimestamp()
-            .setFooter('Created by Roster Bot', 'https://i.imgur.com/wSTFkRM.png'); /////change to rosterbot image when I have it
+            .setFooter('Created by Roster Bot', 'https://imgur.com/TKZLq41'); /////change to rosterbot image when I have it
         message.channel.send(embed);
     }
 
@@ -602,6 +619,7 @@ client.on("message", function (message) {
         let author = message.guild.member(message.author);
         let nickname = author ? author.displayName : null; /////////author nickname
         let guildname = message.guild.name;
+        if (strings === undefined) { message.reply("Something went wrong, please try again"); return; }
         const embed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle(`Team leader list for ${guildname}`)
@@ -609,7 +627,7 @@ client.on("message", function (message) {
             .setThumbnail(message.guild.iconURL())
             .addField('Team Leaders', strings.join('\n'))
             .setTimestamp()
-            .setFooter('Created by Roster Bot', 'https://i.imgur.com/wSTFkRM.png'); /////change to rosterbot image when I have it
+            .setFooter('Created by Roster Bot', 'https://imgur.com/TKZLq41'); /////change to rosterbot image when I have it
         message.channel.send(embed);
     }
 
@@ -694,6 +712,9 @@ client.on("message", function (message) {
         let nickname = author ? author.displayName : null; /////////author nickname
         let guildname = message.guild.name;
         var d = new Date();
+        if (team1names === undefined) { message.reply("Something went wrong, please try again"); return; }
+        if (team2names === undefined) { message.reply("Something went wrong, please try again"); return; }
+
         const embed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle(`${messarg} Teams`)
@@ -703,7 +724,7 @@ client.on("message", function (message) {
             .addField(`Team 1 (${team1.length})`, team1names)
             .addField(`Team 2 (${team2.length})`, team2names)
             .setTimestamp()
-            .setFooter('Created by Roster Bot', 'https://i.imgur.com/wSTFkRM.png'); /////change to rosterbot image when I have it
+            .setFooter('Created by Roster Bot', 'https://imgur.com/TKZLq41'); /////change to rosterbot image when I have it
         message.channel.send(embed);
 
     }
@@ -732,6 +753,9 @@ client.on("message", function (message) {
         let nickname = author ? author.displayName : null; /////////author nickname
         let guildname = message.guild.name;
         var d = new Date();
+        if (team1names === undefined) { message.reply("Something went wrong, please try again"); return; }
+        if (team2names === undefined) { message.reply("Something went wrong, please try again"); return; }
+
         const embed = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle(`${messarg} Teams`)
@@ -741,7 +765,7 @@ client.on("message", function (message) {
             .addField(`Team 1 (${team1.length})`, team1names)
             .addField(`Team 2 (${team2.length})`, team2names)
             .setTimestamp()
-            .setFooter('Created by Roster Bot', 'https://i.imgur.com/wSTFkRM.png'); /////change to rosterbot image when I have it
+            .setFooter('Created by Roster Bot', 'https://imgur.com/TKZLq41'); /////change to rosterbot image when I have it
         message.channel.send(embed);
     }
 
@@ -774,7 +798,7 @@ client.on("message", function (message) {
             .addField("!splitteams (guildleader required)", "Splits the members of a voice lobby into 2 teams based on shared roles")
             .addField("!splitteamsrandom (guildleader required)", "Splits the members of a voice lobby into 2 teams randomly")
             .setTimestamp()
-            .setFooter('Created by Roster Bot', 'https://i.imgur.com/wSTFkRM.png'); /////change to rosterbot image when I have it
+            .setFooter('Created by Roster Bot', 'https://imgur.com/TKZLq41'); /////change to rosterbot image when I have it
         message.channel.send(embed);
     }
 
