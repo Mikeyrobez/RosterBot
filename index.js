@@ -808,3 +808,10 @@ client.on("message", function (message) {
 });
 
 client.login(config.BOT_TOKEN);
+
+const http = require('http');
+const server = http.createServer((req, res) => {
+    res.writeHead(200);
+    res.end('ok');
+});
+server.listen(3000);
