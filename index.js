@@ -53,9 +53,9 @@ client.on('ready', function (message) {
 });
 
 client.on("message", function (message) {
-    if (!message.guild || message.author.bot) return;//if (message.author.bot) return; ///check if author is bot, maybe disable for event creation
     const guildConf = client.settings.ensure(message.guild.id, defaultSettings);
     if (message.content.indexOf(guildConf.prefix) !== 0) return;
+    if (!message.guild || message.author.bot) return;//if (message.author.bot) return; ///check if author is bot, maybe disable for event creation
     const commandBody = message.content.slice(guildConf.prefix.length);
     const args = commandBody.split(' ');
 
@@ -623,7 +623,7 @@ client.on("message", function (message) {
                 strings.push(user);
             }
         }
-        console.log(strings);
+        //console.log(strings);
         let author = message.guild.member(message.author);
         let nickname = author ? author.displayName : null; /////////author nickname
         let guildname = message.guild.name;
@@ -842,7 +842,7 @@ client.on("message", function (message) {
         //message.react(emoji.id);
     }
 });
-
+//client.login(process.env.CLIENT_TOKEN);
 client.login(config.BOT_TOKEN);
 
 const http = require('http');
